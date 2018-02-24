@@ -1,0 +1,7 @@
+GDrive_Sync 0.1 (alpha build)
+--Made by thealphadollar--
+https://github.com/thealphadollar
+
+A simple program to sync your folders with your GDrive Account.
+
+Use -help to know more.

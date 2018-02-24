@@ -1,0 +1,16 @@
+# file to store credentials so we don't need to give permission again and again
+
+client_config_backend: file
+client_config:
+    client_id: 442675981331-9sq75sq0731sc0pef1rsg2jksmqfov2f.apps.googleusercontent.com
+    client_secret: bmPz_4djxl_NZsA4Cvvaz2XT
+
+save_credentials: True
+save_credentials_backend: file
+save_credentials_file: credentials.json
+
+get_refresh_token: True
+
+oauth_scope:
+    - https://www.googleapis.com/auth/drive
+    - https://www.googleapis.com/auth/drive.install
