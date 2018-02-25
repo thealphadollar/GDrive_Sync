@@ -9,7 +9,10 @@ Below is a list of arguments that can be used, use "-help" to know more about th
 * -init / -i
 * -version / -v
 * -config / -c
-* -ls
+* -ls / -l
+* -ls_trash / -lt
+* -ls_folder / -lf
+* -ls_files / -laf
 * -download / -d
 * -upload / -u
 * -share / -s

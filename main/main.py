@@ -7,6 +7,7 @@ import sys
 import file_add
 import auth
 import edit_config
+import file_ops
 
 
 # function to print data to console
@@ -48,8 +49,14 @@ if __name__ == "__main__":
     if len(arguments) == 0:
         p_info("ver")
 
-    for arg_index in range(len(arguments)):
-        if arguments[arg_index] == "-v" or arguments[arg_index] == "-version":
+    arg_index = 0
+
+    while True:
+
+        if arg_index >= len(arguments):
+            break
+
+        elif arguments[arg_index] == "-v" or arguments[arg_index] == "-version":
             p_info("ver")
 
         elif arguments[arg_index] == "-h" or arguments[arg_index] == "-help":
@@ -76,9 +83,25 @@ if __name__ == "__main__":
         elif arguments[arg_index] == "-o" or arguments[arg_index] == "-open":
             pass
 
+        elif arguments[arg_index] == "-ls_files" or arguments[arg_index] == "-laf":
+            arg_index += 1
+            file_ops.f_list(drive, arguments[arg_index], 1)
+
+        elif arguments[arg_index] == "-ls" or arguments[arg_index] == "-l":
+            file_ops.f_list(drive, "all", 0)
+
+        elif arguments[arg_index] == "-ls_trash" or arguments[arg_index] == "-lt":
+            file_ops.f_list(drive, "trash", 0)
+
+        elif arguments[arg_index] == "-ls_folder" or arguments[arg_index] == "-lf":
+            arg_index += 1  # increase arg_index to read the query argument
+            file_ops.f_list(drive, arguments[arg_index], 0)
+
         else:
             print("Unrecognised argument. Please report if you know this is an error.\n\n")
             p_info("arg")
+
+        arg_index += 1
 
 
 

@@ -40,6 +40,18 @@ Configuration is stored in config.json as a dictionary which can be manually edi
 
 Lists all files and folders in your GDrive.
 
+* -ls_trash
+
+Lists all files and folders in your GDrive trash.
+
+* -ls_folder [folder_id]:
+
+Lists files and folders in the given folder id in your drive.
+
+* -ls_files [folder_id/"root"]:
+
+Lists all files recursively present in the folder id given.
+
 * -download [file_name] :
 
 Downloads the given file from GDrive.
