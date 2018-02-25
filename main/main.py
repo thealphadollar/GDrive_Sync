@@ -1,33 +1,12 @@
 #!/usr/bin/env python2
 
-''' all important imports go below'''
+# all important imports go below
 
-from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
 import sys
 import file_add
-
-
-# function to handle authorisation of the user account
-
-def drive_auth():  
-    gauth = GoogleAuth()
-
-    # looking for saved authentication data
-    gauth.LoadCredentialsFile('credentials.json')
-
-    if gauth.credentials is None:
-        gauth.LocalWebserverAuth()
-
-    elif gauth.access_token_expired:
-        # refresh authorisation if expired
-        gauth.Refresh()
-
-    else:
-        # initialise the saved data
-        gauth.Authorize()
-
-    return gauth
+import auth
+import edit_config
 
 
 # function to print data to console
@@ -49,10 +28,18 @@ def p_info(p_str):
             p_data = p_file.read()
             print(p_data)
 
+    elif p_str == "arg":
+        with open(file_add.arg_file) as p_file:
+            if p_file is None:
+                print("Error reading arguments' file. Please report at thealphadollar@iitkgp.ac.in")
+                return
+            p_data = p_file.read()
+            print(p_data)
+
 
 if __name__ == "__main__":
 
-    gauth = drive_auth()
+    gauth = auth.drive_auth(0)  # parameter to reset GAccount permissions
     drive = GoogleDrive(gauth)
 
     arguments = sys.argv[1:]
@@ -69,10 +56,10 @@ if __name__ == "__main__":
             p_info("help")
 
         elif arguments[arg_index] == "-i" or arguments[arg_index] == "-init":
-            pass
+            auth.reset_account()
 
         elif arguments[arg_index] == "-c" or arguments[arg_index] == "-config":
-            pass
+            edit_config.write_config()
 
         elif arguments[arg_index] == "-d" or arguments[arg_index] == "-download":
             pass
@@ -82,6 +69,16 @@ if __name__ == "__main__":
 
         elif arguments[arg_index] == "-s" or arguments[arg_index] == "-share":
             pass
+
+        elif arguments[arg_index] == "-r" or arguments[arg_index] == "-remove":
+            pass
+
+        elif arguments[arg_index] == "-o" or arguments[arg_index] == "-open":
+            pass
+
+        else:
+            print("Unrecognised argument. Please report if you know this is an error.\n\n")
+            p_info("arg")
 
 
 

@@ -99,3 +99,13 @@ ENV/
 
 # mypy
 .mypy_cache/
+auth.pyc
+file_add.pyc
+credentials.json
+.idea/
+-r
+.idea/main.iml
+.idea/misc.xml
+.idea/modules.xml
+.idea/workspace.xml
+.idea/dictionaries/thealpha.xml

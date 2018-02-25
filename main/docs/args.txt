@@ -1,0 +1,17 @@
+GDrive_Sync by thealphadollar
+Github @thealphadollar
+mailto thealphadollar@iitkgp.ac.in
+
+----------------------------------------------------------------------------
+
+Below is a list of arguments that can be used, use "-help" to know more about them.
+
+* -init / -i
+* -version / -v
+* -config / -c
+* -ls
+* -download / -d
+* -upload / -u
+* -share / -s
+* -remove / -r
+* -open / -r
