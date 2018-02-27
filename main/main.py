@@ -69,10 +69,13 @@ if __name__ == "__main__":
             edit_config.write_config()
 
         elif arguments[arg_index] == "-d" or arguments[arg_index] == "-download":
-            pass
+            arg_index += 1
+            file_ops.f_down(drive, arguments[arg_index], file_add.down_addr())
 
         elif arguments[arg_index] == "-u" or arguments[arg_index] == "-upload":
-            pass
+            arg_index += 1
+            # adding to root folder hence None
+            file_ops.f_create(drive, arguments[arg_index], None, str(file_add.get_f_name(arguments[arg_index])), True)
 
         elif arguments[arg_index] == "-s" or arguments[arg_index] == "-share":
             pass
@@ -81,7 +84,8 @@ if __name__ == "__main__":
             pass
 
         elif arguments[arg_index] == "-o" or arguments[arg_index] == "-open":
-            pass
+            arg_index += 1
+            file_ops.f_open(arguments[arg_index])
 
         elif arguments[arg_index] == "-ls_files" or arguments[arg_index] == "-laf":
             arg_index += 1
@@ -98,7 +102,8 @@ if __name__ == "__main__":
             file_ops.f_list(drive, arguments[arg_index], 0)
 
         else:
-            print("Unrecognised argument. Please report if you know this is an error.\n\n")
+            print(str(arguments[arg_index]) + " is an unrecognised argument. Please report if you know this is an error"
+                                              ".\n\n")
             p_info("arg")
 
         arg_index += 1

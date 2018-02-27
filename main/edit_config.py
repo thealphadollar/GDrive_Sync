@@ -123,12 +123,21 @@ def write_config():
     print("\nInput \"0 exit\" at anytime to exit config edit")
 
     while True:
-        opt, value = map(str, raw_input().split())
+        try:
+            opt, value = map(str, raw_input().split())
+        except ValueError:
+            print("please adhere to the input format")
+            continue
         if int(opt) == 0:
             break
 
         elif int(opt) == 7:
-            print(config)
+            print("---Current Configuration---")
+            print("Download directory: " + config['Down_Dir'])
+            print("Upload directories: " + str(config['Up_Dir']))
+            print("Remove post upload: " + str(config['Remove_Post_Upload']))
+            print("Download all: " + str(config['Down_All']))
+            print("Save share link: " + str(config['Share_Link']))
 
         elif int(opt) not in range(1, 7):
             print("Wrong value entered, please try again!")

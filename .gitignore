@@ -109,3 +109,5 @@ credentials.json
 .idea/modules.xml
 .idea/workspace.xml
 .idea/dictionaries/thealpha.xml
+write_json.py
+main/.idea/dictionaries/thealpha.xml

@@ -23,11 +23,14 @@ Shows the current version of the GDrive_Sync.
 * -config :
 
 Gives option to edit the configuration file on which automatic upload and download works.
-- Up_Directory: The directory where the files that are to be uploaded are given.
-    (Default is "local" directory in the same folder)
-- Down_Directory: The directory where the files are downloaded.
-    (Default is "remote" directory in the same folder)
-- Remove_Post_Upload: [Y/N] 'Y' removes the local file post upload. 'N' moves the file to remote folder post upload.
+- Up_Directory: The directory where the files that are to be uploaded are given, relative to home directory.
+    (e.g. for "~/Documents/to_GDrive", input "Documents/to_GDrive")
+    (Default is "to_GDrive" directory in your Documents folder)
+- Down_Directory: The directory where the files are downloaded, relative to home directory.
+    (e.g. for "~/Documents/from_GDrive", input "Documents/from_GDrive")
+    (Default is "from_GDrive" directory in you Documents folder)
+- Remove_Post_Upload: [Y/N] 'Y' removes the local file post upload. 'N' moves the file to GDrive download folder
+post upload.
     (Default is 'N')
 - Down_All: [Y/N] 'Y' downloads all files in your drive to local.
     (Default is 'N')
@@ -52,7 +55,7 @@ Lists files and folders in the given folder id in your drive.
 
 Lists all files recursively present in the folder id given.
 
-* -download [file_name] :
+* -download [file_id] :
 
 Downloads the given file from GDrive.
 
@@ -60,13 +63,13 @@ Downloads the given file from GDrive.
 
 Upload file/folder corresponding to the address given to GDrive, for one time.
 
-* -share [file_name] :
+* -share [file_id] :
 
 Outputs the shareable link of the file.
 
 * -remove [local/remote] [file_name] :
 
-Delete the mentioned file from local or remote copy.
+Delete the mentioned file from GDrive download directory or GDrive remote. Please input file_id if it's a remote file.
 
 * -open [upload/download]
 
