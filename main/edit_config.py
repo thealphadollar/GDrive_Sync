@@ -17,6 +17,10 @@ config = {}
 
 
 def add_up_folder(addr):
+    if addr is None:
+        print("Error: missing parameter")
+        return False
+
     if os.path.isdir(addr):
         if addr.lower() not in config['Up_Dir']:
             config['Up_Dir'].append(addr.lower())
@@ -26,35 +30,47 @@ def add_up_folder(addr):
             return False
 
     else:
-        print("Not a directory! Please check the address.")
+        print("Error: Not a directory! Please check the address.")
         return False
 
 
 def del_up_folder(addr):
+    if addr is None:
+        print("Error: missing parameter")
+        return False
+
     if os.path.isdir(addr):
         if addr.lower() in config['Up_Dir']:
             config['Up_Dir'].remove(addr.lower())
             return True
         else:
-            print("Directory not in upload list!")
+            print("Error: Directory not in upload list!")
             return False
 
     else:
-        print("Not a directory! Please check the address.")
+        print("Error: Not a directory! Please check the address.")
         return False
 
 
 def modify_down_folder(addr):
+    if addr is None:
+        print("Error: missing parameter")
+        return False
+
     if os.path.isdir(addr):
         config['Down_Dir'] = addr.lower()
         return True
 
     else:
-        print("Not a directory! Please check the address.")
+        print("Error: Not a directory! Please check the address.")
         return False
 
 
 def rm_post_upload(value):
+    if value is None:
+        print("Error: missing parameter")
+        return False
+
     if value.lower() == 'n':
         config['Remove_Post_Upload'] = False
         return True
@@ -64,11 +80,15 @@ def rm_post_upload(value):
         return True
 
     else:
-        print("Wrong parameter to change to!")
+        print("Error: Wrong parameter to change to!")
         return False
 
 
 def down_all(value):
+    if value is None:
+        print("Error: missing parameter")
+        return False
+
     if value.lower() == 'n':
         config['Down_All'] = False
         return True
@@ -78,11 +98,15 @@ def down_all(value):
         return True
 
     else:
-        print("Wrong parameter to change to!")
+        print("Error: Wrong parameter to change to!")
         return False
 
 
 def share_link(value):
+    if value is None:
+        print("Error: missing parameter")
+        return False
+
     if value.lower() == 'n':
         config['Share_Link'] = False
         return True
@@ -92,11 +116,16 @@ def share_link(value):
         return True
 
     else:
-        print("Wrong parameter to change to!")
+        print("Error: Wrong parameter to change to!")
         return False
 
 
 def write_permit(value):
+    if value is None:
+        print("Error: missing parameter")
+        return False
+
+    print(value)
     if value.lower() == 'n':
         config['Write_Permission'] = False
         return True
@@ -106,7 +135,7 @@ def write_permit(value):
         return True
 
     else:
-        print("Wrong parameter to change to!")
+        print("Error: Wrong parameter to change to!")
         return False
 
 
@@ -140,28 +169,39 @@ def write_config():
     print("\nInput \"0 exit\" at anytime to exit config edit")
 
     while True:
+        user_input = str(raw_input())
+        value = None  # define value to None to catch error
         try:
-            opt, value = map(str, raw_input().split())
+            if len(user_input.split()) == 1:
+                opt = int(user_input)
+            elif len(user_input.split()) > 1:
+                opt, value = map(str, user_input.split())
         except ValueError:
-            print("please adhere to the input format")
+            print("Error: please adhere to the input format")
             continue
-        if int(opt) == 0:
-            break
 
-        elif int(opt) == 7:
-            print("---Current Configuration---")
-            print("Download directory: " + config['Down_Dir'])
-            print("Upload directories: " + str(config['Up_Dir']))
-            print("Remove post upload: " + str(config['Remove_Post_Upload']))
-            print("Download all: " + str(config['Down_All']))
-            print("Save share link: " + str(config['Share_Link']))
-            print("Write permission granted: " + str(config['Write_Permission']))
+        # if input is not acceptable by int
+        try:
+            if int(opt) == 0:
+                break
 
-        elif int(opt) not in range(1, 7):
-            print("Wrong value entered, please try again!")
+            elif int(opt) == 8:
+                print("---Current Configuration---")
+                print("Download directory: " + config['Down_Dir'])
+                print("Upload directories: " + str(config['Up_Dir']))
+                print("Remove post upload: " + str(config['Remove_Post_Upload']))
+                print("Download all: " + str(config['Down_All']))
+                print("Save share link: " + str(config['Share_Link']))
+                print("Write permission granted: " + str(config['Write_Permission']))
 
-        elif option[int(opt)](value):
-            print("Success")
+            elif int(opt) not in range(1, 8):
+                print("Error: Wrong parameters entered")
+
+            elif option[int(opt)](value):
+                print("Success")
+        except ValueError:
+            print("Error: invalid input")
+            continue
 
     with open(file_add.config_file, "w") as output:
         json.dump(config, output)
