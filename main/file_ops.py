@@ -85,7 +85,17 @@ def f_down(drive, f_id, down_folder):
     with open(file_add.mime_dict) as f:
         mime_swap = json.load(f)
 
-    if d_file['mimeType'] in mime_swap:  # for online file types like GDocs, GSheets etc.
+    # checking if the specified id belongs to a folder
+    if d_file['mimeType'] == mime_swap['folder']:
+        if d_file['title'] in os.listdir(down_folder):
+            print("%s already present in %s" % (d_file['title'], down_folder))
+
+        else:
+            print("creating folder " + os.path.join(down_folder, d_file['title']))
+            file_add.dir_exists(os.path.join(down_folder, d_file['title']))
+            f_all(drive, d_file['id'], None, True, os.path.join(down_folder, d_file['title']))
+
+    elif d_file['mimeType'] in mime_swap:  # for online file types like GDocs, GSheets etc.
 
         # open formats.json for adding custom format
         with open(file_add.format_dict) as f:
@@ -96,23 +106,16 @@ def f_down(drive, f_id, down_folder):
             print("%s already present in %s" % (f_name, down_folder))
 
         else:
+            print("downloading " + os.path.join(down_folder, f_name))
             d_file.GetContentFile(os.path.join(down_folder, f_name),
                                   mimetype=mime_swap[d_file['mimeType']])
-
-    # checking if the specified id belongs to a folder
-    if d_file['mimeType'] == mime_swap['folder']:
-        if d_file['title'] in os.listdir(down_folder):
-            print("%s already present in %s" % (d_file['title'], down_folder))
-
-        else:
-            file_add.dir_exists(os.path.join(down_folder, d_file['title']))
-            f_all(drive, d_file['id'], None, True, os.path.join(down_folder, d_file['title']))
 
     else:
         if d_file['title'] in os.listdir(down_folder):
             print("%s already present in %s" % (d_file['title'], down_folder))
 
         else:
+            print("downloading " + os.path.join(down_folder, d_file['title']))
             d_file.GetContentFile(os.path.join(down_folder, d_file['title']))
 
 

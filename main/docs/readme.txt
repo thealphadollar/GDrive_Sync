@@ -68,9 +68,10 @@ Lists files and folders in the given folder id in your drive.
 
 Lists all files recursively present in the folder id given.
 
-* -download [file_id] :
+* -download [file_id1] [file_id2]:
 
-Downloads the given file from GDrive.
+Downloads the given file from GDrive. Multiple files can be downloaded by putting file_ids one after the other.
+Use "-d all" argument to download entire your entire GDrive.
 
 * -upload [file_add] :
 

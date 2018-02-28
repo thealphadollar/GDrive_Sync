@@ -88,7 +88,17 @@ if __name__ == "__main__":
 
         elif arguments[arg_index] == "-d" or arguments[arg_index] == "-download" or arguments[arg_index] == "download":
             arg_index += 1
-            file_ops.f_down(drive, arguments[arg_index], file_add.down_addr())
+            if is_matching(arg_index, len(arguments)):
+                # download entire drive folder
+                if arguments[arg_index] == "all":
+                    file_list = drive.ListFile({'q': "'root' in parents and trashed=false"}).GetList()
+                    for argument in file_list:
+                        file_ops.f_down(drive, argument, file_add.down_addr())
+                # download only specified folder
+                else:
+                    for argument in arguments[arg_index: len(arguments)]:
+                        file_ops.f_down(drive, argument, file_add.down_addr())
+                arg_index = len(arguments)  # all arguments used up by download
 
         elif arguments[arg_index] == "-u" or arguments[arg_index] == "-upload" or arguments[arg_index] == "upload":
             arg_index += 1
