@@ -36,12 +36,15 @@ post upload.
     (Default is 'N')
 - Share_Link: [Y/N] 'Y' puts the shareable link of the file uploaded in share.txt in Up_Directory.
     (Default is 'Y')
+- Write_Permission: [Y/N] 'Y' gives the write permission in the sharable link.
+    (Default is 'N')
 
 Configuration is stored in config.json as a dictionary which can be manually edited as well.
 
 * -ls [local/remote] :
 
-Lists all files and folders in your GDrive.
+Lists all files and folders in your GDrive (default or when "remote" used).
+Lists all files and folders in your downloads directory (when "local" used).
 
 * -ls_trash
 
@@ -67,9 +70,10 @@ Upload file/folder corresponding to the address given to GDrive, for one time.
 
 Outputs the shareable link of the file.
 
-* -remove [local/remote] [file_name] :
+* -remove [local/remote] [file_name/folder_name/file_id/folder_id] :
 
-Delete the mentioned file from GDrive download directory or GDrive remote. Please input file_id if it's a remote file.
+Delete the mentioned file from GDrive download directory or GDrive remote. Please input file_id/folder_id if it's a
+remote file. You can add multiple file_ids/folder_ids one after the other, e.g. -remove remote [file_id1] [file_id2]
 
 * -open [upload/download]
 

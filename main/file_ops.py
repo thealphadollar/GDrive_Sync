@@ -4,6 +4,13 @@ import file_add
 import os
 import shutil
 import edit_config
+from pydrive import files
+
+
+# list all files and folders in the downloads directory
+def f_list_local():
+    for f in os.listdir(file_add.down_addr()):
+        print(f)
 
 
 # Operations for file list commands
@@ -67,6 +74,10 @@ def f_all(drive, fold_id, file_list, download, down_folder):
 
 # Download file using given file_id to downloads folder
 def f_down(drive, f_id, down_folder):
+
+    # check if file id not valid
+    if not is_valid_id(drive, f_id):
+        return
 
     d_file = drive.CreateFile({'id': f_id})
 
@@ -164,7 +175,12 @@ def f_up(drive, addr, fold_id):
         # remove file if Remove_Post_Upload is true, otherwise move to GDrive downloads
         remove_post_upload = edit_config.read_config()['Remove_Post_Upload']
         if remove_post_upload:
-            shutil.rmtree(addr)
+            # use recursive removal if directory
+            if os.path.isdir(addr):
+                shutil.rmtree(addr)
+            # normal os removal for file
+            else:
+                os.remove(addr)
         else:
             shutil.move(addr, file_add.down_addr())
     else:
@@ -183,3 +199,88 @@ def f_open(folder):
     else:
         print("%s is an unrecognised argument for open" % folder)
 
+
+# removes a file from remote/local
+def f_remove(drive, mode, addrs):
+
+    if mode == "local":
+        down_dir = file_add.down_addr()
+        # Appending file/folder name to download directory
+        for addr in addrs:
+            f_path = os.path.join(down_dir, addr)
+            if not os.path.exists(f_path):
+                print("%s doesn't exist in %s" % (addr, down_dir))
+            else:
+                # use recursive removal if directory
+                if os.path.isdir(addr):
+                    shutil.rmtree(f_path)
+                else:
+                    os.remove(f_path)
+                print("%s removed from %s" % (addr, down_dir))
+
+    # Move file in GDrive to trash or delete permanently
+    elif mode == "remote":
+        for addr in addrs:
+            # check if file_id valid
+            if is_valid_id(drive, addr):
+                # file to be removed
+                r_file = drive.CreateFile({'id': addr})
+                f_name = r_file['title']
+                # delete permanently if in trash
+                if is_trash(drive, r_file['id']):
+                    r_file.Delete()
+                    print("%s deleted permanently" % f_name)
+                # move to trash
+                else:
+                    r_file.Trash()
+                    print("%s moved to GDrive trash. List files in trash by -lt parameter" % f_name)
+    else:
+        print("%s is not a valid mode" % mode)
+        return
+
+
+# provide share link, last argument True prints to console, otherwise write to file
+def share_link(drive, file_id, to_print):
+    if is_valid_id(drive, file_id):
+        # creating shared file
+        s_file = drive.CreateFile({'id': file_id})
+        # check if writing permission allowed by user
+        if edit_config.read_config()['Write_Permission']:
+            role = "writer"
+        else:
+            role = "reader"
+        # inserting the new permissions
+        s_file.InsertPermission({
+            'type': 'anyone',
+            'value': 'anyone',
+            'role': role
+        })
+        # fetching the alternate link
+        s_file.FetchMetadata(fields='alternateLink, title')
+
+        if to_print:
+            print(s_file['alternateLink'])
+        # save to file end
+        else:
+            with open(file_add.share_store, "a") as share_store:
+                share_store.write(s_file['title'] + ": " + s_file['alternateLink'] + "\n")
+
+
+# return if file_id belongs to trash
+def is_trash(drive, file_id):
+    for f in drive.ListFile({'q': "'root' in parents and trashed=true"}).GetList():
+        if file_id == f['id']:
+            return True
+    return False
+
+
+# check if file_id is valid
+def is_valid_id(drive, file_id):
+    try:
+        r_file = drive.CreateFile({'id': file_id})
+        r_file['title']
+    # catch invalid file id
+    except files.ApiRequestError:
+        print("%s is an invalid file_id!" % file_id)
+        return False
+    return True

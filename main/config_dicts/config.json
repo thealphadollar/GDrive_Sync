@@ -1,1 +1,2 @@
-{"Down_Dir": "Documents/from_GDrive", "Up_Dir": ["Documents/to_GDrive"], "Down_All": false, "Share_Link": true, "Remove_Post_Upload": true}
+{"Down_Dir": "Documents/from_GDrive", "Up_Dir": ["Documents/to_GDrive"], "Down_All": false, "Share_Link": true,
+  "Remove_Post_Upload": true, "Write_Permission": false}

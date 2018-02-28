@@ -9,6 +9,7 @@ config = {
     'Remove_Post_Upload': True,
     'Down_All': False,
     'Share_Link': True
+    'Write_Permission': False
 }
 '''
 
@@ -95,13 +96,28 @@ def share_link(value):
         return False
 
 
+def write_permit(value):
+    if value.lower() == 'n':
+        config['Write_Permission'] = False
+        return True
+
+    elif value.lower() == 'y':
+        config['Write_Permission'] = True
+        return True
+
+    else:
+        print("Wrong parameter to change to!")
+        return False
+
+
 option = {
     1: add_up_folder,
     2: del_up_folder,
     3: modify_down_folder,
     4: rm_post_upload,
     5: down_all,
-    6: share_link
+    6: share_link,
+    7: write_permit
 }
 
 
@@ -119,7 +135,8 @@ def write_config():
     print("4. Toggle Remove_Post_Upload [Y/N]")
     print("5. Toggle Down_All [Y/N]")
     print("6. Toggle Save_Share_Link [Y/N]")
-    print("7. List current settings [type \"7 ls\"]")
+    print("7. Toggle Write_Permission [Y/N]")
+    print("8. List current settings [type \"8 ls\"]")
     print("\nInput \"0 exit\" at anytime to exit config edit")
 
     while True:
@@ -138,6 +155,7 @@ def write_config():
             print("Remove post upload: " + str(config['Remove_Post_Upload']))
             print("Download all: " + str(config['Down_All']))
             print("Save share link: " + str(config['Share_Link']))
+            print("Write permission granted: " + str(config['Write_Permission']))
 
         elif int(opt) not in range(1, 7):
             print("Wrong value entered, please try again!")

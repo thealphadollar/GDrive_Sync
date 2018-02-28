@@ -7,6 +7,7 @@ import edit_config
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
 
+# list of manual addresses
 ver_file = os.path.join(dir_path, "docs/ver_info.txt")
 help_file = os.path.join(dir_path, "docs/readme.txt")
 arg_file = os.path.join(dir_path, "docs/args.txt")
@@ -14,6 +15,7 @@ cred_file = os.path.join(dir_path, "credentials.json")
 config_file = os.path.join(dir_path, "config_dicts/config.json")
 mime_dict = os.path.join(dir_path, "config_dicts/mime_dict.json")
 format_dict = os.path.join(dir_path, "config_dicts/formats.json")
+
 
 # Making file address for upload and downloads
 config = edit_config.read_config()
@@ -51,3 +53,7 @@ def up_addr():
 def get_f_name(addr):
     head, tail = ntpath.split(addr)
     return tail or ntpath.basename(head)  # return tail when file, otherwise other one for folder
+
+
+# list of manual addresses
+share_store = os.path.join(down_addr(), "share_links.txt")
