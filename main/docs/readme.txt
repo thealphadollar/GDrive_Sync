@@ -13,7 +13,7 @@ The parameters that can be used are:
 
 * -reset :
 
-Reset GDrive_Sync and give it the read and write permissions to your Google Drive. Automatically executed at the
+Reset account associated with GDrive_Sync and give it the read and write permissions to your Google Drive. Automatically executed at the
 first run of GDrive_Sync.
 
 * -start :
