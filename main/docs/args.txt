@@ -6,8 +6,12 @@ mailto thealphadollar@iitkgp.ac.in
 
 Below is a list of arguments that can be used, use "-help" to know more about them.
 
-* -init / -i
+* -reset / -re
+* -start / -st
+* -stop / -x
+* -status / -y
 * -version / -v
+* -help / -h
 * -config / -c
 * -ls / -l
 * -ls_trash / -lt
@@ -17,4 +21,4 @@ Below is a list of arguments that can be used, use "-help" to know more about th
 * -upload / -u
 * -share / -s
 * -remove / -r
-* -open / -r
+* -open / -o

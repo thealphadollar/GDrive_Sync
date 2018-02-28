@@ -8,6 +8,7 @@ import file_add
 import auth
 import edit_config
 import file_ops
+import cron_handle
 
 
 # function to print data to console
@@ -70,8 +71,17 @@ if __name__ == "__main__":
         elif arguments[arg_index] == "-h" or arguments[arg_index] == "-help" or arguments[arg_index] == "help":
             p_info("help")
 
-        elif arguments[arg_index] == "-i" or arguments[arg_index] == "-init" or arguments[arg_index] == "init":
+        elif arguments[arg_index] == "-re" or arguments[arg_index] == "-reset" or arguments[arg_index] == "reset":
             auth.reset_account()
+
+        elif arguments[arg_index] == "-st" or arguments[arg_index] == "-start" or arguments[arg_index] == "start":
+            cron_handle.cron_process(drive, "start")
+
+        elif arguments[arg_index] == "-x" or arguments[arg_index] == "-stop" or arguments[arg_index] == "stop":
+            cron_handle.cron_process(drive, "stop")
+
+        elif arguments[arg_index] == "-y" or arguments[arg_index] == "-status" or arguments[arg_index] == "status":
+            cron_handle.cron_process(drive, "status")
 
         elif arguments[arg_index] == "-c" or arguments[arg_index] == "-config" or arguments[arg_index] == "config":
             edit_config.write_config()
@@ -84,7 +94,8 @@ if __name__ == "__main__":
             arg_index += 1
             if is_matching(arg_index, len(arguments)):
                 # adding to root folder hence None
-                file_ops.f_create(drive, arguments[arg_index], None, str(file_add.get_f_name(arguments[arg_index])), True)
+                file_ops.f_create(drive, arguments[arg_index], None, str(file_add.get_f_name(arguments[arg_index])),
+                                  True)
 
         elif arguments[arg_index] == "-s" or arguments[arg_index] == "-share" or arguments[arg_index] == "share":
             arg_index += 1
@@ -103,7 +114,8 @@ if __name__ == "__main__":
             if is_matching(arg_index, len(arguments)):
                 file_ops.f_open(arguments[arg_index])
 
-        elif arguments[arg_index] == "-ls_files" or arguments[arg_index] == "-laf" or arguments[arg_index] == "ls_files":
+        elif arguments[arg_index] == "-ls_files" or arguments[arg_index] == "-laf" or \
+                arguments[arg_index] == "ls_files":
             arg_index += 1
             if is_matching(arg_index, len(arguments)):
                 file_ops.f_list(drive, arguments[arg_index], 1)
@@ -140,7 +152,3 @@ if __name__ == "__main__":
             p_info("arg")
 
         arg_index += 1
-
-
-
-

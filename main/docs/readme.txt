@@ -11,10 +11,22 @@ need to switch to other cloud file storing platforms or have to pay for commerci
 
 The parameters that can be used are:
 
-* -init :
+* -reset :
 
-Initiate GDrive_Sync and give it the read and write permissions to your Google Drive. Automatically executed at the
+Reset GDrive_Sync and give it the read and write permissions to your Google Drive. Automatically executed at the
 first run of GDrive_Sync.
+
+* -start :
+
+Start the automatic GDrive syncing of the folders set as upload directories.
+
+* -stop :
+
+Stop the automatic GDrive syncing of the folders set as upload directories.
+
+* -status :
+
+Shows whether GDrive is uploading automatically or not.
 
 * -version :
 
@@ -31,8 +43,6 @@ Gives option to edit the configuration file on which automatic upload and downlo
     (Default is "from_GDrive" directory in you Documents folder)
 - Remove_Post_Upload: [Y/N] 'Y' removes the local file post upload. 'N' moves the file to GDrive download folder
 post upload.
-    (Default is 'N')
-- Down_All: [Y/N] 'Y' downloads all files in your drive to local.
     (Default is 'N')
 - Share_Link: [Y/N] 'Y' puts the shareable link of the file uploaded in share.txt in Up_Directory.
     (Default is 'Y')

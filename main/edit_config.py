@@ -3,13 +3,13 @@ import os
 import file_add
 
 '''
+Default values for config.json
 config = {
-    'Up_Dir': ['/local'],
-    'Down_Dir': '/remote',
+    'Up_Dir': ['Documents/to_GDrive'],
+    'Down_Dir': 'Documents/from_GDrive',
     'Remove_Post_Upload': True,
-    'Down_All': False,
-    'Share_Link': True
-    'Write_Permission': False
+    'Share_Link': True,
+    'Write_Permission': False,
 }
 '''
 
@@ -125,7 +125,6 @@ def write_permit(value):
         print("Error: missing parameter")
         return False
 
-    print(value)
     if value.lower() == 'n':
         config['Write_Permission'] = False
         return True
@@ -207,6 +206,7 @@ def write_config():
         json.dump(config, output)
 
 
+# returns the current configuration file
 def read_config():
 
     with open(file_add.config_file, 'r') as f_input:

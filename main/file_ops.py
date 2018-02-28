@@ -160,6 +160,10 @@ def f_create(drive, addr, fold_id, rel_addr, show_update):
         up_file['title'] = file_add.get_f_name(addr)  # sets file title to original
         up_file.Upload()
 
+        # saves share link if required
+        if not show_update and edit_config.read_config()['Share_Link']:
+            share_link(drive, up_file['id'], False)
+
     return True
 
 

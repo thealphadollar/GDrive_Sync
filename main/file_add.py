@@ -44,7 +44,7 @@ def up_addr():
     up_addr_list = []
     for addr in config['Up_Dir']:
         # making directory if it doesn't exist
-        dir_exists(addr)
+        dir_exists(os.path.join(os.path.expanduser('~'), addr))
         up_addr_list.append(os.path.join(os.path.expanduser('~'), addr))
     return up_addr_list
 
