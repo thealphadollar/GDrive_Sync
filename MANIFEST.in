@@ -1,0 +1,7 @@
+include README.md
+include LICENSE
+include main/client_secrets.json
+include main/settings.yaml
+include main/docs/*.txt
+include main/config_dicts/*.json
+include main/

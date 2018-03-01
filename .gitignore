@@ -111,3 +111,7 @@ credentials.json
 .idea/dictionaries/thealpha.xml
 write_json.py
 main/.idea/dictionaries/thealpha.xml
+*.pyc
+/dist/
+/*.egg-info
+/*.egg

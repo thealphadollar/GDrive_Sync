@@ -4,12 +4,18 @@
 from __future__ import print_function
 from __future__ import absolute_import
 from builtins import str
-from os import sys
+
+import sys
+from os import path
 from pydrive.drive import GoogleDrive
 
 
 # function to print data to console
 def p_info(p_str):
+
+    # set path for relativistic imports if not launched as package
+    sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
+    import file_add
 
     if p_str == "ver":
         with open(file_add.ver_file) as p_file:
@@ -36,20 +42,11 @@ def p_info(p_str):
             print(p_data)
 
 
-# checks if number of expected arguments and given arguments mismatch
-def is_matching(index, len_arg):
-    if index >= len_arg:
-        print("Error: arguments less than what expected")
-        return False
-    return True
-
-
-if __name__ == "__main__" and __package__ is None:
+# main function to launch GDrive_Sync
+def main():
 
     # set path for relativistic imports if not launched as package
     if __package__ is None:
-        import sys
-        from os import path
         sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
         import file_add
         import auth
@@ -64,7 +61,6 @@ if __name__ == "__main__" and __package__ is None:
         from . import edit_config
         from . import file_ops
         from . import cron_handle
-
 
     gauth = auth.drive_auth(0)  # parameter to reset GAccount permissions
     drive = GoogleDrive(gauth)
@@ -179,3 +175,15 @@ if __name__ == "__main__" and __package__ is None:
             p_info("arg")
 
         arg_index += 1
+
+
+# checks if number of expected arguments and given arguments mismatch
+def is_matching(index, len_arg):
+    if index >= len_arg:
+        print("Error: arguments less than what expected")
+        return False
+    return True
+
+
+if __name__ == "__main__" and __package__ is None:
+    main()
