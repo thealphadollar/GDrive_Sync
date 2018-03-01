@@ -158,7 +158,7 @@ def write_config():
     print("\nInput \"0 exit\" at anytime to exit config edit")
 
     while True:
-        user_input = str(input())
+        user_input = str(eval(input()))
         value = None  # define value to None to catch error
         try:
             if len(user_input.split()) == 1:
