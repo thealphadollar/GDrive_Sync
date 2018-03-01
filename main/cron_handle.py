@@ -1,9 +1,15 @@
-import file_add
-import file_ops
+from __future__ import print_function
+from __future__ import absolute_import
 import os
+from os import sys, path
 import pwd
 import json
 from crontab import CronTab
+
+# set directory for relativistic import
+sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
+import file_add
+import file_ops
 
 
 # returns current username

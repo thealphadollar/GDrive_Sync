@@ -1,14 +1,10 @@
 #!/usr/bin/env python2
 
 # all important imports go below
-
+from __future__ import print_function
+from __future__ import absolute_import
+from os import sys
 from pydrive.drive import GoogleDrive
-import sys
-import file_add
-import auth
-import edit_config
-import file_ops
-import cron_handle
 
 
 # function to print data to console
@@ -47,7 +43,27 @@ def is_matching(index, len_arg):
     return True
 
 
-if __name__ == "__main__":
+if __name__ == "__main__" and __package__ is None:
+
+    # set path for relativistic imports if not launched as package
+    if __package__ is None:
+        import sys
+        from os import path
+        sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
+        import file_add
+        import auth
+        import edit_config
+        import file_ops
+        import cron_handle
+
+    # using relativistic imports directly if launched as package
+    else:
+        from . import file_add
+        from . import auth
+        from . import edit_config
+        from . import file_ops
+        from . import cron_handle
+
 
     gauth = auth.drive_auth(0)  # parameter to reset GAccount permissions
     drive = GoogleDrive(gauth)

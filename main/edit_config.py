@@ -1,5 +1,11 @@
+from __future__ import print_function
+from __future__ import absolute_import
 import json
 import os
+from os import sys, path
+
+# set directory for relativistic import
+sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
 import file_add
 
 '''

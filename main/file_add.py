@@ -1,7 +1,12 @@
+from __future__ import absolute_import
 # stores default file address
 import os
+from os import sys, path
 import ntpath
 import errno
+
+# set directory for relativistic import
+sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
 import edit_config
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -57,3 +62,8 @@ def get_f_name(addr):
 
 # list of manual addresses
 share_store = os.path.join(down_addr(), "share_links.txt")
+
+
+# to eradicate circular import problems
+if __name__ == "__main__":
+    pass

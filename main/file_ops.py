@@ -1,10 +1,16 @@
+from __future__ import print_function
+from __future__ import absolute_import
 # contains file operations and functions
 import json
-import file_add
 import os
+from os import sys, path
 import shutil
-import edit_config
 from pydrive import files
+
+# set directory for relativistic import
+sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
+import file_add
+import edit_config
 
 
 # list all files and folders in the downloads directory
