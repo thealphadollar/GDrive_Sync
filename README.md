@@ -1,4 +1,4 @@
-# GDrive_Demo
+# GDrive_Sync
 
 This repository contains scripts that make GDrive tasks easier using command line functions and PyDrive wrapper for Google Drive.
 
@@ -17,7 +17,7 @@ root permission for the "-start", "-stop" and "-status" argument since it needs 
 
 ## Installation And Usage
 
-Current build works on Python 2.
+Current build works on Python 2 (Python 3 is supported but a bug is there which does not allow connection to be established on systems using proxy).
 
 ### Dependencies
 1. PyDrive<br/>
@@ -139,4 +139,4 @@ Opens the upload or download directory in file explorer.
 
 ## -- Work In Progress On --
 
-Making this a pip installable package and compatible with python3
+Making this a pip installable package
