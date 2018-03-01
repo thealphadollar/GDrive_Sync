@@ -1,5 +1,9 @@
 from __future__ import print_function
 from __future__ import absolute_import
+from builtins import input
+from builtins import str
+from builtins import map
+from builtins import range
 import json
 import os
 from os import sys, path
@@ -90,24 +94,6 @@ def rm_post_upload(value):
         return False
 
 
-def down_all(value):
-    if value is None:
-        print("Error: missing parameter")
-        return False
-
-    if value.lower() == 'n':
-        config['Down_All'] = False
-        return True
-
-    elif value.lower() == 'y':
-        config['Down_All'] = True
-        return True
-
-    else:
-        print("Error: Wrong parameter to change to!")
-        return False
-
-
 def share_link(value):
     if value is None:
         print("Error: missing parameter")
@@ -149,9 +135,8 @@ option = {
     2: del_up_folder,
     3: modify_down_folder,
     4: rm_post_upload,
-    5: down_all,
-    6: share_link,
-    7: write_permit
+    5: share_link,
+    6: write_permit
 }
 
 
@@ -167,20 +152,19 @@ def write_config():
     print("2. Remove Upload Folder [full path to folder]")
     print("3. Change Download Directory [full path to folder]")
     print("4. Toggle Remove_Post_Upload [Y/N]")
-    print("5. Toggle Down_All [Y/N]")
-    print("6. Toggle Save_Share_Link [Y/N]")
-    print("7. Toggle Write_Permission [Y/N]")
-    print("8. List current settings [type \"8 ls\"]")
+    print("5. Toggle Save_Share_Link [Y/N]")
+    print("6. Toggle Write_Permission [Y/N]")
+    print("7. List current settings [type \"7 ls\"]")
     print("\nInput \"0 exit\" at anytime to exit config edit")
 
     while True:
-        user_input = str(raw_input())
+        user_input = str(input())
         value = None  # define value to None to catch error
         try:
             if len(user_input.split()) == 1:
                 opt = int(user_input)
             elif len(user_input.split()) > 1:
-                opt, value = map(str, user_input.split())
+                opt, value = list(map(str, user_input.split()))
         except ValueError:
             print("Error: please adhere to the input format")
             continue
@@ -190,16 +174,15 @@ def write_config():
             if int(opt) == 0:
                 break
 
-            elif int(opt) == 8:
+            elif int(opt) == 7:
                 print("---Current Configuration---")
                 print("Download directory: " + config['Down_Dir'])
                 print("Upload directories: " + str(config['Up_Dir']))
                 print("Remove post upload: " + str(config['Remove_Post_Upload']))
-                print("Download all: " + str(config['Down_All']))
                 print("Save share link: " + str(config['Share_Link']))
                 print("Write permission granted: " + str(config['Write_Permission']))
 
-            elif int(opt) not in range(1, 8):
+            elif int(opt) not in list(range(1, 7)):
                 print("Error: Wrong parameters entered")
 
             elif option[int(opt)](value):

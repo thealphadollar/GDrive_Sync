@@ -1,6 +1,7 @@
 from __future__ import print_function
 from __future__ import absolute_import
 # contains file operations and functions
+from builtins import str
 import json
 import os
 from os import sys, path
