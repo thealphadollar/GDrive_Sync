@@ -98,28 +98,28 @@ the user granting the permission.
 
 The parameters that can be used are:
 
-* -reset :
+* -reset
 
 Reset account associated with GDrive_Sync and give it the read and write permissions to your Google Drive. Automatically executed at the
 first run of GDrive_Sync.
 
-* -start :
+* -start
 
 Start the automatic GDrive syncing of the folders set as upload directories.
 
-* -stop :
+* -stop
 
 Stop the automatic GDrive syncing of the folders set as upload directories.
 
-* -status :
+* -status
 
 Shows whether GDrive is uploading automatically or not.
 
-* -version :
+* -version
 
 Shows the current version of the GDrive_Sync.
 
-* -config :
+* -config
 
 Gives option to edit the configuration file on which automatic upload and download works.
 - Up_Directory: The directory where the files that are to be uploaded are given, relative to home directory.
@@ -138,7 +138,7 @@ post upload.
 
 Configuration is stored in config.json as a dictionary which can be manually edited as well.
 
-* -ls [local/remote] :
+* -ls [local/remote]
 
 Lists all files and folders in your GDrive (default or when "remote" used).
 Lists all files and folders in your downloads directory (when "local" used).
@@ -147,28 +147,28 @@ Lists all files and folders in your downloads directory (when "local" used).
 
 Lists all files and folders in your GDrive trash.
 
-* -ls_folder [folder_id]:
+* -ls_folder [folder_id]
 
 Lists files and folders in the given folder id in your drive.
 
-* -ls_files [folder_id/"root"]:
+* -ls_files [folder_id/"root"]
 
 Lists all files recursively present in the folder id given.
 
-* -download [file_id1] [file_id2]:
+* -download [file_id1] [file_id2]
 
 Downloads the given file from GDrive. Multiple files can be downloaded by putting file_ids one after the other.
 Use "-d all" argument to download entire your entire GDrive.
 
-* -upload [file_add] :
+* -upload [file_add]
 
 Upload file/folder corresponding to the address given to GDrive, for one time.
 
-* -share [file_id] :
+* -share [file_id]
 
 Outputs the shareable link of the file.
 
-* -remove [local/remote] [file_name/folder_name/file_id/folder_id] :
+* -remove [local/remote] [file_name/folder_name/file_id/folder_id]
 
 Delete the mentioned file from GDrive download directory or GDrive remote. Please input file_id/folder_id if it's a
 remote file. You can add multiple file_ids/folder_ids one after the other, e.g. -remove remote [file_id1] [file_id2]
