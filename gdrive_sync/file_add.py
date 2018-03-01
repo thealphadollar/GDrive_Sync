@@ -1,4 +1,5 @@
 from __future__ import absolute_import
+from pkg_resources import resource_string
 # stores default file address
 import os
 from os import sys, path
@@ -12,17 +13,28 @@ if __package__ is None:
 else:
     from . import edit_config
 
-dir_path = os.path.dirname(os.path.realpath(__file__))
+dir_path = os.path.dirname(os.path.abspath(__file__))
 
 
 # list of manual addresses
-ver_file = os.path.join(dir_path, "docs/ver_info.txt")
-help_file = os.path.join(dir_path, "docs/readme.txt")
-arg_file = os.path.join(dir_path, "docs/args.txt")
-cred_file = os.path.join(dir_path, "credentials.json")
-config_file = os.path.join(dir_path, "config_dicts/config.json")
-mime_dict = os.path.join(dir_path, "config_dicts/mime_dict.json")
-format_dict = os.path.join(dir_path, "config_dicts/formats.json")
+# when launched as non-package
+if __package__ is None:
+    ver_file = os.path.join(dir_path, "docs/ver_info.txt")
+    help_file = os.path.join(dir_path, "docs/readme.txt")
+    arg_file = os.path.join(dir_path, "docs/args.txt")
+    cred_file = os.path.join(dir_path, "credentials.json")
+    config_file = os.path.join(dir_path, "config_dicts/config.json")
+    mime_dict = os.path.join(dir_path, "config_dicts/mime_dict.json")
+    format_dict = os.path.join(dir_path, "config_dicts/formats.json")
+# when launched as package
+else:
+    ver_file = resource_string(__name__, "docs/ver_info.txt")
+    help_file = resource_string(__name__, "docs/readme.txt")
+    arg_file = resource_string(__name__, "docs/args.txt")
+    cred_file = resource_string(__name__, "credentials.json")
+    config_file = resource_string(__name__, "config_dicts/config.json")
+    mime_dict = resource_string(__name__, "config_dicts/mime_dict.json")
+    format_dict = resource_string(__name__, "config_dicts/formats.json")
 
 
 # Making file address for upload and downloads

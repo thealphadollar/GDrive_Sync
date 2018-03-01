@@ -30,19 +30,19 @@ Current build works on Python 2 (Python 3 is supported but a bug is there which 
 1. Clone the [repository](https://github.com/thealphadollar/GDrive_Demo.git), <br/>
 `git clone https://github.com/thealphadollar/GDrive_Demo.git`
 2. Open the folder and give<br/>
-`sudo -H ./main.py -start`<br/>
-This command adds `./main.py -start` to your cron jobs with periodicity of 5 minutes.
+`sudo -H ./gdrive_sync/main.py -start`<br/>
+This command adds `./gdrive_sync/main.py -start` to your cron jobs with periodicity of 5 minutes.
 3. A link will open asking for GDrive access; allow for all.
 4. Now GDrive_Sync will be monitoring default upload/download folders. Use `-config` parameter to add/modify upload or download
 directory.
 5. To stop GDrive_Sync at any instance,<br/>
-`sudo -H ./main.py -stop`
+`sudo -H ./gdrive_sync/main.py -stop`
 6. To know if GDrive_Sync is active,<br/>
-`sudo -H ./main.py -status` 
+`sudo -H ./gdrive_sync/main.py -status` 
 
 ### What Cron Script Does?
 
-The code for this is present in `main/cron_handle.py`
+The code for this is present in `gdrive_sync/cron_handle.py`
 
 - Periodically checks (every 5 minutes) the upload folders for a file change.
 - If a new file is found which is not being uploaded by any other instance of the same function, it marks it as being uploaded
