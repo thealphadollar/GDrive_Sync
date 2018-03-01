@@ -7,8 +7,11 @@ from os import sys, path
 import os
 
 # set directory for relativistic import
-sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
-import file_add
+if __package__ is None:
+    sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
+    import file_add
+else:
+    from . import file_add
 
 # to handle authorisation of the user account
 

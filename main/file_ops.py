@@ -8,10 +8,14 @@ from os import sys, path
 import shutil
 from pydrive import files
 
-# set directory for relativistic import
-sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
-import file_add
-import edit_config
+if __package__ is None:
+    # set directory for relativistic import
+    sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
+    import file_add
+    import edit_config
+else:
+    from . import file_add
+    from . import edit_config
 
 
 # list all files and folders in the downloads directory

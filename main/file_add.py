@@ -6,8 +6,11 @@ import ntpath
 import errno
 
 # set directory for relativistic import
-sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
-import edit_config
+if __package__ is None:
+    sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
+    import edit_config
+else:
+    from . import edit_config
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 

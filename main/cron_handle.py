@@ -6,10 +6,14 @@ import pwd
 import json
 from crontab import CronTab
 
-# set directory for relativistic import
-sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
-import file_add
-import file_ops
+if __package__ is None:
+    # set directory for relativistic import
+    sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
+    import file_add
+    import file_ops
+else:
+    from . import file_add
+    from . import file_ops
 
 
 # returns current username

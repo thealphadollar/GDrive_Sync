@@ -8,9 +8,12 @@ import json
 import os
 from os import sys, path
 
-# set directory for relativistic import
-sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
-import file_add
+if __package__ is None:
+    # set directory for relativistic import
+    sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
+    import file_add
+else:
+    from . import file_add
 
 '''
 Default values for config.json
