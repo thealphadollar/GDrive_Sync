@@ -19,7 +19,7 @@ root permission for the "-start", "-stop" and "-status" argument since it needs 
 
 ## Installation And Usage
 
-Current build works on Python 2 (Python 3 is supported but a bug is there which does not allow connection to be established on systems using proxy).
+Current build works on Python 2 (Python 3 is supported but a [bug](https://github.com/thealphadollar/GDrive_Sync/issues/11) is there which does not allow connection to be established on systems using proxy).
 
 ### Dependencies
 Please install pip before moving on if you don't have python-pip<br/>
@@ -39,9 +39,9 @@ The repository can be installed through pip or by manually cloning the repositor
 
 ##### Using pip
 
-1. Install through pip2 (till [python3 bug](https://github.com/thealphadollar/GDrive_Sync/issues/11) is resolved)<br/>
+1. Use the below command to install drive_sync using pip2 (till [python3 bug](https://github.com/thealphadollar/GDrive_Sync/issues/11) is resolved)<br/>
 `pip2 install drive_sync`<br/>
-This process also resolves all the dependencies.
+This process also installs all the missing dependencies.
 2. To initiate the upload process from default directory.<br/>
 `drive_sync -start` </br>
 This will open a web browser if its the first launch of GDrive_Sync. Later it'll be used to start the process with previously
