@@ -8,19 +8,19 @@ from os import sys, path
 import shutil
 from pydrive import files
 
-if __package__ is None:
+try:
     # set directory for relativistic import
     sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
     import file_add
     import edit_config
-else:
+except ImportError:
     from . import file_add
     from . import edit_config
 
 
 # list all files and folders in the downloads directory
 def f_list_local():
-    for f in os.listdir(file_add.down_addr()):
+    for f in os.listdir(edit_config.down_addr()):
         print(f)
 
 
@@ -200,7 +200,7 @@ def f_up(drive, addr, fold_id):
             else:
                 os.remove(addr)
         else:
-            shutil.move(addr, file_add.down_addr())
+            shutil.move(addr, edit_config.down_addr())
     else:
         print("Upload unsuccessful, please try again!")
 
@@ -208,10 +208,10 @@ def f_up(drive, addr, fold_id):
 # Opens download/uploads folder
 def f_open(folder):
     if folder.lower() == "download":
-        os.system('xdg-open "%s"' % file_add.down_addr())
+        os.system('xdg-open "%s"' % edit_config.down_addr())
 
     elif folder.lower() == "upload":
-        for addr in file_add.up_addr():
+        for addr in edit_config.up_addr():
             os.system('xdg-open "%s"' % addr)
 
     else:
@@ -222,7 +222,7 @@ def f_open(folder):
 def f_remove(drive, mode, addrs):
 
     if mode == "local":
-        down_dir = file_add.down_addr()
+        down_dir = edit_config.down_addr()
         # Appending file/folder name to download directory
         for addr in addrs:
             f_path = os.path.join(down_dir, addr)
@@ -280,7 +280,7 @@ def share_link(drive, file_id, to_print):
             print(s_file['alternateLink'])
         # save to file end
         else:
-            with open(file_add.share_store, "a") as share_store:
+            with open(edit_config.share_store, "a") as share_store:
                 share_store.write(s_file['title'] + ": " + s_file['alternateLink'] + "\n")
 
 

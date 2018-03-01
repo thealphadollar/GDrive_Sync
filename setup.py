@@ -9,7 +9,7 @@ def readme():
 
 setup(
     name='drive_sync',  # name of the program
-    version='0.92',  # current version
+    version='0.95',  # current version
     description='GDrive_Sync is an automatic folder syncing client for Google Drive',
     long_description=readme(),
     classifiers=[
@@ -24,13 +24,14 @@ setup(
     keywords='google-drive GDrive automatic sync GDrive manager',
     url='http://github.com/thealphadollar/GDrive_Sync',  # link to repository
     author='thealphadollar',
-    author_email='thealphadollar@iitkgp.ac.in',
+    author_email='shivam.cs.iit.kgp@gmail.com',
     license='MIT',
     packages=['gdrive_sync'],  # folders to be included
     include_package_data=True,
     install_requires=[
         'pydrive',
-        'python-crontab'
+        'python-crontab',
+        'future'
       ],
     dependency_links=[],  # add github links of dependencies not present in pypi but have a setup file
     entry_points={

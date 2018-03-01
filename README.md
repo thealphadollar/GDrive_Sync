@@ -13,32 +13,60 @@ GDrive_Sync asks for permission from your Google Drive account to carry out the 
 in the document.
 
 GDrive_Sync uses [PyDrive](https://github.com/googledrive/PyDrive) and [crontab](https://pypi.python.org/pypi/python-crontab) to interact with GDrive and Unix cron process manager respectively. It also requires 
-root permission for the "-start", "-stop" and "-status" argument since it needs to alter the CronTab files. 
+root permission for the "-start", "-stop" and "-status" argument since it needs to alter the CronTab files.
+
+[futurize](http://python-future.org/overview.html) library is used for the purpose of making the code compatible with both, python 2 and python 3.  
 
 ## Installation And Usage
 
 Current build works on Python 2 (Python 3 is supported but a bug is there which does not allow connection to be established on systems using proxy).
 
 ### Dependencies
-1. PyDrive<br/>
-`sudo -H pip2 install PyDrive`
-2. crontab<br/>
-`sudo -H pip2 install python-crontab`
+Please install pip before moving on if you don't have python-pip<br/>
+`sudo apt-get update`<br/>
+`sudo apt-get install python-pip`<br/>
 
-### Cloning And Initiating
+Once pip is installed, download the below dependencies (you don't need to follow the below steps if using pip installation method).
+1. PyDrive<br/>
+`pip2 install PyDrive`
+2. crontab<br/>
+`pip2 install python-crontab`
+3. future<br/>
+`pip2 install future`
+
+### Installing
+The repository can be installed through pip or by manually cloning the repository. 
+
+##### Using pip
+
+1. Install through pip2 (till [python3 bug](https://github.com/thealphadollar/GDrive_Sync/issues/11) is resolved)<br/>
+`pip2 install drive_sync`<br/>
+This process also resolves all the dependencies.
+2. To initiate the upload process from default directory.<br/>
+`drive_sync -start` </br>
+This will open a web browser if its the first launch of GDrive_Sync. Later it'll be used to start the process with previously
+associated GAccount unless "-reset" is used.
+3. Now GDrive_Sync will be monitoring set upload/download folders. Use `-config` parameter to add/modify upload or download
+directory.
+4. To stop GDrive_Sync at any instance,<br/>
+`drive_sync -stop`
+5. To know if GDrive_Sync is active,<br/>
+`./gdrive_sync/main.py -status` 
+
+##### Manual Cloning
 
 1. Clone the [repository](https://github.com/thealphadollar/GDrive_Demo.git), <br/>
 `git clone https://github.com/thealphadollar/GDrive_Demo.git`
 2. Open the folder and give<br/>
-`sudo -H ./gdrive_sync/main.py -start`<br/>
+`./gdrive_sync/main.py -start`<br/>
 This command adds `./gdrive_sync/main.py -start` to your cron jobs with periodicity of 5 minutes.
 3. A link will open asking for GDrive access; allow for all.
-4. Now GDrive_Sync will be monitoring default upload/download folders. Use `-config` parameter to add/modify upload or download
+4. Now GDrive_Sync will be monitoring set upload/download folders. Use `-config` parameter to add/modify upload or download
 directory.
 5. To stop GDrive_Sync at any instance,<br/>
-`sudo -H ./gdrive_sync/main.py -stop`
+`./gdrive_sync/main.py -stop`
 6. To know if GDrive_Sync is active,<br/>
-`sudo -H ./gdrive_sync/main.py -status` 
+`./gdrive_sync/main.py -status` 
 
 ### What Cron Script Does?
 
@@ -53,6 +81,18 @@ it is moved to the set download directory.
 - If Share_Link is True in `config_dicts/config.json` then a share link for each uploaded file is placed in the set download
 directory. 
 - It is highly advisable to set your own download and upload directories.
+
+### Why Require GDrive Authentication?
+
+GDrive_Sync requires Google Drive full read and write access. 
+
+It asks for "https://www.googleapis.com/auth/drive" which translates to,<br/>
+"Full, permissive scope to access all of a user's files, excluding the Application Data folder. Request this scope only when it is strictly necessary."<br/>
+
+This is required in order to download and upload files as well as create directories along with creation of sharable link.
+
+The author cannot modify/manipulate any personal data or Google Drive files. All the write/read access are provided solely to
+the user granting the permission.  
  
 ## Parameters
 
@@ -137,6 +177,7 @@ remote file. You can add multiple file_ids/folder_ids one after the other, e.g. 
 
 Opens the upload or download directory in file explorer.
 
-## -- Work In Progress On --
+## Contributing
 
-Making this a pip installable package
+Contributions to this project are highly encouraged. We will soon be having a contribution guide.<br/>
+To begin, please have a look at the issues. They are simple and easy to implement/resolve.

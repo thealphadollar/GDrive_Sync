@@ -8,14 +8,18 @@ from builtins import str
 import sys
 from os import path
 from pydrive.drive import GoogleDrive
+from pydrive.auth import GoogleAuth
 
 
 # function to print data to console
 def p_info(p_str):
 
     # set path for relativistic imports if not launched as package
-    sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
-    import file_add
+    try:
+        sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
+        import file_add
+    except ImportError:
+        from . import file_add
 
     if p_str == "ver":
         with open(file_add.ver_file) as p_file:
@@ -46,7 +50,7 @@ def p_info(p_str):
 def main():
 
     # set path for relativistic imports if not launched as package
-    if __package__ is None:
+    try:
         sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
         import file_add
         import auth
@@ -55,13 +59,14 @@ def main():
         import cron_handle
 
     # using relativistic imports directly if launched as package
-    else:
+    except ImportError:
         from . import file_add
         from . import auth
         from . import edit_config
         from . import file_ops
         from . import cron_handle
 
+    GoogleAuth.DEFAULT_SETTINGS['client_config_file'] = file_add.client_secrets
     gauth = auth.drive_auth(0)  # parameter to reset GAccount permissions
     drive = GoogleDrive(gauth)
 
@@ -106,11 +111,11 @@ def main():
                 if arguments[arg_index] == "all":
                     file_list = drive.ListFile({'q': "'root' in parents and trashed=false"}).GetList()
                     for argument in file_list:
-                        file_ops.f_down(drive, argument, file_add.down_addr())
+                        file_ops.f_down(drive, argument, edit_config.down_addr())
                 # download only specified folder
                 else:
                     for argument in arguments[arg_index: len(arguments)]:
-                        file_ops.f_down(drive, argument, file_add.down_addr())
+                        file_ops.f_down(drive, argument, edit_config.down_addr())
                 arg_index = len(arguments)  # all arguments used up by download
 
         elif arguments[arg_index] == "-u" or arguments[arg_index] == "-upload" or arguments[arg_index] == "upload":

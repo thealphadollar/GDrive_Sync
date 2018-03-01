@@ -6,14 +6,16 @@ import pwd
 import json
 from crontab import CronTab
 
-if __package__ is None:
+try:
     # set directory for relativistic import
     sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
     import file_add
     import file_ops
-else:
+    import edit_config
+except ImportError:
     from . import file_add
     from . import file_ops
+    from . import edit_config
 
 
 # returns current username
@@ -29,6 +31,7 @@ def is_running(remove):  # remove tells if the function was called from stop
         if job.comment == 'start GDrive_Sync':
             if remove:
                 cron.remove(job)
+                print("GDrive_Sync stopped")
             running = True
     cron.write()
     return running
@@ -40,13 +43,20 @@ def cron_process(drive, arg):
         # add cron script if cron not running
         if not is_running(False):
             cron = CronTab(user=get_username())
-            gdrive_job = cron.new(command='%s -start' % os.path.join(file_add.dir_path, 'main.py'),
-                                  comment='start GDrive_Sync')
+            if __package__ is None:
+                gdrive_job = cron.new(command='%s -start' % os.path.join(file_add.dir_path, 'main.py'),
+                                      comment='start GDrive_Sync')
+            else:
+                gdrive_job = cron.new(command='drive_sync -start', comment='start GDrive_Sync')
             gdrive_job.minute.every(5)  # setting to run every five minutes
             cron.write()
+            print("GDrive_Sync started")
+
+        else:
+            print("GDrive_Sync is already running")
 
         # traversing through all upload folders
-        for folder in file_add.up_addr():
+        for folder in edit_config.up_addr():
             # stores if the file is being uploaded
             uploading = {}
 
@@ -71,7 +81,7 @@ def cron_process(drive, arg):
                 with open(path, 'w') as f_output:
                     json.dump(uploading, f_output)
             except IOError:
-                print("Error: insufficient permission")
+                print("Error: insufficient permission to write to %s" % folder)
                 return
 
             # processing upload queue

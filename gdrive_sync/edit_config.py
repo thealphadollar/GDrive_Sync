@@ -8,11 +8,11 @@ import json
 import os
 from os import sys, path
 
-if __package__ is None:
+try:
     # set directory for relativistic import
     sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
     import file_add
-else:
+except ImportError:
     from . import file_add
 
 '''
@@ -200,8 +200,32 @@ def write_config():
 
 # returns the current configuration file
 def read_config():
-
     with open(file_add.config_file, 'r') as f_input:
         temp = json.load(f_input)
 
     return temp
+
+
+# Returns the current download directory address
+def down_addr():
+    # Making file address for upload and downloads
+    config = read_config()
+    addr = os.path.join(os.path.expanduser('~'), config['Down_Dir'])
+    # making directory if it doesn't exist
+    file_add.dir_exists(addr)
+    return addr
+
+
+# Returns list with current set upload directories
+def up_addr():
+    up_addr_list = []
+    config = read_config()
+    for addr in config['Up_Dir']:
+        # making directory if it doesn't exist
+        file_add.dir_exists(os.path.join(os.path.expanduser('~'), addr))
+        up_addr_list.append(os.path.join(os.path.expanduser('~'), addr))
+    return up_addr_list
+
+
+# return the address of the file to store shares
+share_store = os.path.join(down_addr(), "share_links.txt")
