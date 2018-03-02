@@ -8,7 +8,19 @@ from builtins import str
 import sys
 from os import path
 from pydrive.drive import GoogleDrive
-from pydrive.auth import GoogleAuth
+
+# list of parameters which require verification
+require_auth = [
+    "-start", "start", "-st",
+    "-download", "download", "-d",
+    "-upload", "upload", "-u",
+    "-share", "share", "-s",
+    "-remove", "remove", "-r",
+    "-ls_files", "ls_files", "-laf",
+    "-ls", "ls", "-l",
+    "-ls_trash", "ls_trash", "-lt",
+    "-ls_folder", "ls_folder", "-lf"
+]
 
 
 # function to print data to console
@@ -66,10 +78,6 @@ def main():
         from . import file_ops
         from . import cron_handle
 
-    GoogleAuth.DEFAULT_SETTINGS['client_config_file'] = file_add.client_secrets
-    gauth = auth.drive_auth(0)  # parameter to reset GAccount permissions
-    drive = GoogleDrive(gauth)
-
     arguments = sys.argv[1:]
 
     # if function called without any arguments print version info
@@ -79,6 +87,15 @@ def main():
     arg_index = 0
 
     while True:
+
+        # if argument requires authentication
+        if arguments[arg_index] in require_auth:
+            gauth = auth.drive_auth(0)  # parameter to reset GAccount permissions
+            drive = GoogleDrive(gauth)
+
+        # set drive to none for operations not requiring auth
+        else:
+            drive = None
 
         if arg_index >= len(arguments):
             break

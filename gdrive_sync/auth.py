@@ -19,6 +19,7 @@ except ImportError:
 def drive_auth(reset):
 
     g_auth = GoogleAuth()
+
     # changing default settings of GoogleAuth
     g_auth.DEFAULT_SETTINGS['client_config_file'] = file_add.client_secrets
     g_auth.DEFAULT_SETTINGS['client_config_backend'] = 'file'
