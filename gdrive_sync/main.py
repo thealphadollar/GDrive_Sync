@@ -1,8 +1,7 @@
 #!/usr/bin/env python2
 
 # all important imports go below
-from __future__ import print_function
-from __future__ import absolute_import
+from __future__ import print_function, absolute_import
 from builtins import str
 
 import sys
@@ -88,19 +87,18 @@ def main():
 
     while True:
 
+        if arg_index >= len(arguments):
+            break
+
         # if argument requires authentication
         if arguments[arg_index] in require_auth:
             gauth = auth.drive_auth(0)  # parameter to reset GAccount permissions
             drive = GoogleDrive(gauth)
-
         # set drive to none for operations not requiring auth
         else:
             drive = None
 
-        if arg_index >= len(arguments):
-            break
-
-        elif arguments[arg_index] == "-v" or arguments[arg_index] == "-version" or arguments[arg_index] == "version":
+        if arguments[arg_index] == "-v" or arguments[arg_index] == "-version" or arguments[arg_index] == "version":
             p_info("ver")
 
         elif arguments[arg_index] == "-h" or arguments[arg_index] == "-help" or arguments[arg_index] == "help":

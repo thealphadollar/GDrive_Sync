@@ -1,14 +1,13 @@
-from __future__ import print_function
-from __future__ import absolute_import
+from __future__ import print_function, absolute_import
 # module contains all authorisation related functions
 
 from pydrive.auth import GoogleAuth
-from os import sys, path
+import sys
 import os
 
 # set directory for relativistic import
 try:
-    sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
+    sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     import file_add
 except ImportError:
     from . import file_add

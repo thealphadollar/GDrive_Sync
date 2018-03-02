@@ -1,16 +1,13 @@
-from __future__ import print_function
-from __future__ import absolute_import
-from builtins import input
-from builtins import str
-from builtins import map
-from builtins import range
+from __future__ import print_function, absolute_import
+from builtins import input, str, map, range
+
 import json
 import os
-from os import sys, path
+import sys
 
 try:
     # set directory for relativistic import
-    sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
+    sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     import file_add
 except ImportError:
     from . import file_add

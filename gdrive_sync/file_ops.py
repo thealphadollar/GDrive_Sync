@@ -1,16 +1,15 @@
-from __future__ import print_function
-from __future__ import absolute_import
+from __future__ import print_function, absolute_import
 # contains file operations and functions
 from builtins import str
 import json
 import os
-from os import sys, path
+import sys
 import shutil
 from pydrive import files
 
 try:
     # set directory for relativistic import
-    sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
+    sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     import file_add
     import edit_config
 except ImportError:
