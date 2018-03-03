@@ -1,4 +1,4 @@
-GDrive_Sync 0.98 (beta build)
+GDrive_Sync 0.99 (beta build)
 --Made by thealphadollar--
 https://github.com/thealphadollar
 

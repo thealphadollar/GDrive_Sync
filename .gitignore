@@ -115,3 +115,8 @@ main/.idea/dictionaries/thealpha.xml
 /dist/
 /*.egg-info
 /*.egg
+../drive_sync/
+../drive_sync2/
+../drive_test/
+../ls/
+gdrive_sync/config_dicts/config.json

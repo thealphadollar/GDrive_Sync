@@ -11,6 +11,7 @@ from pydrive.drive import GoogleDrive
 # list of parameters which require verification
 require_auth = [
     "-start", "start", "-st",
+    "-by_cron",
     "-download", "download", "-d",
     "-upload", "upload", "-u",
     "-share", "share", "-s",
@@ -108,13 +109,13 @@ def main():
             auth.reset_account()
 
         elif arguments[arg_index] == "-st" or arguments[arg_index] == "-start" or arguments[arg_index] == "start":
-            cron_handle.cron_process(drive, "start")
+            cron_handle.cron_process("start")
 
         elif arguments[arg_index] == "-x" or arguments[arg_index] == "-stop" or arguments[arg_index] == "stop":
-            cron_handle.cron_process(drive, "stop")
+            cron_handle.cron_process("stop")
 
         elif arguments[arg_index] == "-y" or arguments[arg_index] == "-status" or arguments[arg_index] == "status":
-            cron_handle.cron_process(drive, "status")
+            cron_handle.cron_process("status")
 
         elif arguments[arg_index] == "-c" or arguments[arg_index] == "-config" or arguments[arg_index] == "config":
             edit_config.write_config()
@@ -188,6 +189,9 @@ def main():
             arg_index += 1  # increase arg_index to read the query argument
             if is_matching(arg_index, len(arguments)):
                 file_ops.f_list(drive, arguments[arg_index], 0)
+
+        elif arguments[arg_index] == "-by_cron":
+            cron_handle.by_cron(drive)
 
         else:
             print(str(arguments[arg_index]) + " is an unrecognised argument. Please report if you know this is an error"

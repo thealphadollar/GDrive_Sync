@@ -32,8 +32,8 @@ def add_up_folder(addr):
         return False
 
     if os.path.isdir(addr):
-        if addr.lower() not in config['Up_Dir']:
-            config['Up_Dir'].append(addr.lower())
+        if addr not in config['Up_Dir']:
+            config['Up_Dir'].append(addr)
             return True
         else:
             print("Folder already exists!")
@@ -50,8 +50,8 @@ def del_up_folder(addr):
         return False
 
     if os.path.isdir(addr):
-        if addr.lower() in config['Up_Dir']:
-            config['Up_Dir'].remove(addr.lower())
+        if addr in config['Up_Dir']:
+            config['Up_Dir'].remove(addr)
             return True
         else:
             print("Error: Directory not in upload list!")
@@ -68,7 +68,7 @@ def modify_down_folder(addr):
         return False
 
     if os.path.isdir(addr):
-        config['Down_Dir'] = addr.lower()
+        config['Down_Dir'] = addr
         return True
 
     else:
@@ -158,7 +158,7 @@ def write_config():
     print("\nInput \"0 exit\" at anytime to exit config edit")
 
     while True:
-        user_input = str(eval(input()))
+        user_input = str(input())
         value = None  # define value to None to catch error
         try:
             if len(user_input.split()) == 1:
