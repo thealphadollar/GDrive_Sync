@@ -83,14 +83,19 @@ def is_running(remove):  # remove tells if the function was called from stop
     return running
 
 
-# cron progress execution from
+# cron progress execution from crontab
 def cron_process(arg):
     if arg == "start":
         # add cron script if cron not running
         if not is_running(False):
             cron = CronTab(user=get_username())
-            gdrive_job = cron.new(command='%s -by_cron' % os.path.join(file_add.dir_path, 'main.py'),
-                                  comment='start GDrive_Sync')
+            # when not run as drive_sync from command line
+            if __package__ is None:
+                gdrive_job = cron.new(command='%s -by_cron' % os.path.join(file_add.dir_path, 'main.py'),
+                                      comment='start GDrive_Sync')
+            # when run as package from command line
+            else:
+                gdrive_job = cron.new(command='drive_sync -by_cron', comment='start GDrive_Sync')
             gdrive_job.minute.every(5)  # setting to run every five minutes
             cron.write()
             print("GDrive_Sync started")

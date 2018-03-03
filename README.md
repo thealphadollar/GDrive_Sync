@@ -42,15 +42,21 @@ The repository can be installed through pip or by manually cloning the repositor
 1. Use the below command to install drive_sync using pip2 (till [python3 bug](https://github.com/thealphadollar/GDrive_Sync/issues/11) is resolved)<br/>
 `pip2 install drive_sync`<br/>
 This process also installs all the missing dependencies.
-2. To initiate the upload process from default directory.<br/>
+2. Open the crontab editor in terminal,<br/>
+`crontab -e`<br/>
+and add the [following lines](https://superuser.com/questions/784252/crontab-and-binaries-in-usr-local-bin) to it.
+`PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin
+LD_LIBRARY_PATH=/usr/local/lib
+`
+3. To initiate the upload process from default directory.<br/>
 `drive_sync -start` </br>
 This will open a web browser if its the first launch of GDrive_Sync. Later it'll be used to start the process with previously
 associated GAccount unless "-reset" is used.
-3. Now GDrive_Sync will be monitoring set upload/download folders. Use `-config` parameter to add/modify upload or download
+4. Now GDrive_Sync will be monitoring set upload/download folders. Use `-config` parameter to add/modify upload or download
 directory.
-4. To stop GDrive_Sync at any instance,<br/>
+5. To stop GDrive_Sync at any instance,<br/>
 `drive_sync -stop`
-5. To know if GDrive_Sync is active,<br/>
+6. To know if GDrive_Sync is active,<br/>
 `./gdrive_sync/main.py -status` 
 
 ##### Manual Cloning
