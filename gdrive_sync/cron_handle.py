@@ -42,11 +42,8 @@ def cron_process(drive, arg):
         # add cron script if cron not running
         if not is_running(False):
             cron = CronTab(user=get_username())
-            if __package__ is None:
-                gdrive_job = cron.new(command='%s -start' % os.path.join(file_add.dir_path, 'main.py'),
-                                      comment='start GDrive_Sync')
-            else:
-                gdrive_job = cron.new(command='drive_sync -start', comment='start GDrive_Sync')
+            gdrive_job = cron.new(command='%s -start' % os.path.join(file_add.dir_path, 'main.py'),
+                                  comment='start GDrive_Sync')
             gdrive_job.minute.every(5)  # setting to run every five minutes
             cron.write()
             print("GDrive_Sync started")

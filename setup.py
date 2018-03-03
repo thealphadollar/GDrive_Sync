@@ -9,7 +9,7 @@ def readme():
 
 setup(
     name='drive_sync',  # name of the program
-    version='0.95',  # current version
+    version='0.98',  # current version
     description='GDrive_Sync is an automatic folder syncing client for Google Drive',
     long_description=readme(),
     classifiers=[
