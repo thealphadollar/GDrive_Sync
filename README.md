@@ -44,12 +44,11 @@ The repository can be installed through pip or by manually cloning the repositor
 This process also installs all the missing dependencies.
 2. Open the crontab editor in terminal,<br/>
 `crontab -e`<br/>
-and add the [following lines](https://superuser.com/questions/784252/crontab-and-binaries-in-usr-local-bin) to it.
-`PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin
-LD_LIBRARY_PATH=/usr/local/lib
-`
+and add the [following lines](https://superuser.com/questions/784252/crontab-and-binaries-in-usr-local-bin) to it.<br/>
+`PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin`<br/>
+`LD_LIBRARY_PATH=/usr/local/lib`
 3. To initiate the upload process from default directory.<br/>
-`drive_sync -start` </br>
+`drive_sync -start` <br/>
 This will open a web browser if its the first launch of GDrive_Sync. Later it'll be used to start the process with previously
 associated GAccount unless "-reset" is used.
 4. Now GDrive_Sync will be monitoring set upload/download folders. Use `-config` parameter to add/modify upload or download
@@ -61,8 +60,8 @@ directory.
 
 ##### Manual Cloning
 
-1. Clone the [repository](https://github.com/thealphadollar/GDrive_Demo.git), <br/>
-`git clone https://github.com/thealphadollar/GDrive_Demo.git`
+1. Clone the [repository](https://github.com/thealphadollar/GDrive_Sync.git), <br/>
+`git clone https://github.com/thealphadollar/GDrive_Sync.git`
 2. Open the folder and give<br/>
 `./gdrive_sync/main.py -start`<br/>
 This command adds `./gdrive_sync/main.py -start` to your cron jobs with periodicity of 5 minutes.
