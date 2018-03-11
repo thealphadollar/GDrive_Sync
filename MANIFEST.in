@@ -1,7 +1,6 @@
 include README.md
 include LICENSE
-include gdrive_sync/client_secrets.json
-include gdrive_sync/settings.yaml
+include gdrive_sync/.client_secrets.json
 include gdrive_sync/docs/*.txt
 include gdrive_sync/config_dicts/*.json
 include gdrive_sync/

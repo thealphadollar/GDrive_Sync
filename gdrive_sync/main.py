@@ -23,9 +23,13 @@ require_auth = [
 ]
 
 
-# function to print data to console
 def p_info(p_str):
+    """
+    prints error data
 
+    Args:
+        p_str: to tell which error message to print
+    """
     # set path for relativistic imports if not launched as package
     try:
         sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))

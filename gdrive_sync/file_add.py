@@ -7,6 +7,7 @@ import errno
 from pydrive import settings
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
+home = os.path.expanduser("~")
 
 
 # list of manual addresses
@@ -18,7 +19,7 @@ try:
     config_file = os.path.join(dir_path, "config_dicts/config.json")
     mime_dict = os.path.join(dir_path, "config_dicts/mime_dict.json")
     format_dict = os.path.join(dir_path, "config_dicts/formats.json")
-    client_secrets = os.path.join(dir_path, "client_secrets.json")
+    client_secrets = os.path.join(dir_path, ".client_secrets.json")
     settings_file = os.path.join(dir_path, "settings.yaml")
 # when launched as package
 except settings.InvalidConfigError or OSError:
@@ -28,7 +29,7 @@ except settings.InvalidConfigError or OSError:
     config_file = resource_filename(__name__, "config_dicts/config.json")
     mime_dict = resource_filename(__name__, "config_dicts/mime_dict.json")
     format_dict = resource_filename(__name__, "config_dicts/formats.json")
-    client_secrets = resource_filename(__name__, "client_secrets.json")
+    client_secrets = resource_filename(__name__, ".client_secrets.json")
     settings_file = resource_filename(__name__, "settings.yaml")
 
 
@@ -37,10 +38,10 @@ def cred_file():
 
     # when launched as non-package
     try:
-        return os.path.join(dir_path, "credentials.json")
+        return os.path.join(home, ".credentials.json")
     # when launched as package
     except settings.InvalidConfigError or OSError:
-        return resource_filename(__name__, "credentials.json")
+        return os.path.join(home, ".credentials.json")
 
 
 # Checks if directory present, otherwise make it
