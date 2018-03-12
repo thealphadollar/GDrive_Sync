@@ -27,6 +27,13 @@ config = {}
 
 
 def add_up_folder(addr):
+    """
+    appends address to upload list
+    Args:
+        addr: path of folder
+    Returns:
+        True if successful, False otherwise
+    """
     if addr is None:
         print("Error: missing parameter")
         return False
@@ -45,6 +52,13 @@ def add_up_folder(addr):
 
 
 def del_up_folder(addr):
+    """
+    removes address from upload list
+    Args:
+        addr: path of folder
+    Returns:
+        True if successful, False otherwise
+    """
     if addr is None:
         print("Error: missing parameter")
         return False
@@ -63,6 +77,13 @@ def del_up_folder(addr):
 
 
 def modify_down_folder(addr):
+    """
+    changes address of downloads folder
+    Args:
+        addr: path of folder
+    Returns:
+        True if successful, False otherwise
+    """
     if addr is None:
         print("Error: missing parameter")
         return False
@@ -77,6 +98,13 @@ def modify_down_folder(addr):
 
 
 def rm_post_upload(value):
+    """
+    set value for remove post upload
+    Args:
+        value: True if file to be removed, false otherwise
+    Returns:
+        True if successful, False otherwise
+    """
     if value is None:
         print("Error: missing parameter")
         return False
@@ -95,6 +123,13 @@ def rm_post_upload(value):
 
 
 def share_link(value):
+    """
+    set value for share link
+    Args:
+        value: True if share link to be stored, false otherwise
+    Returns:
+        True if successful, False otherwise
+    """
     if value is None:
         print("Error: missing parameter")
         return False
@@ -113,6 +148,13 @@ def share_link(value):
 
 
 def write_permit(value):
+    """
+    set value for write_permit
+    Args:
+        value: True if write permission to be given, false otherwise
+    Returns:
+        True if successful, False otherwise
+    """
     if value is None:
         print("Error: missing parameter")
         return False
@@ -141,6 +183,9 @@ option = {
 
 
 def write_config():
+    """
+    displays console for editing and manages input
+    """
     global config
 
     config = read_config()
@@ -195,16 +240,28 @@ def write_config():
         json.dump(config, output)
 
 
-# returns the current configuration file
 def read_config():
+    """
+    reads the configuration
+    Args:
+        None
+    Returns:
+        temp: dictionary having configuration data
+    """
     with open(file_add.config_file, 'r') as f_input:
         temp = json.load(f_input)
 
     return temp
 
 
-# Returns the current download directory address
 def down_addr():
+    """
+    reads download directory address from configuration
+    Args:
+        None
+    Returns:
+        addr: path to download directory
+    """
     # Making file address for upload and downloads
     config = read_config()
     addr = os.path.join(os.path.expanduser('~'), config['Down_Dir'])
@@ -213,8 +270,14 @@ def down_addr():
     return addr
 
 
-# Returns list with current set upload directories
 def up_addr():
+    """
+    reads upload directories' from configuration
+    Args:
+        None
+    Returns:
+        up_addr_list: list of path to upload directories
+    """
     up_addr_list = []
     config = read_config()
     for addr in config['Up_Dir']:
