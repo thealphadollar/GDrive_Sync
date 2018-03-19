@@ -236,8 +236,11 @@ def write_config():
             print("Error: invalid input")
             continue
 
-    with open(file_add.config_file, "w") as output:
-        json.dump(config, output)
+    try:
+    	with open(file_add.config_file, "w") as output:
+    	    json.dump(config, output)
+   	except IOError:
+   		print("Permission Denied: please run with sudo")
 
 
 def read_config():
