@@ -1,0 +1,4 @@
+pydrive
+python-crontab
+future
+pyperclip
