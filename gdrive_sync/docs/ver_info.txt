@@ -1,4 +1,4 @@
-GDrive_Sync 1.111 (beta build)
+GDrive_Sync 1.12 (beta build)
 --Made by thealphadollar--
 https://github.com/thealphadollar
 
