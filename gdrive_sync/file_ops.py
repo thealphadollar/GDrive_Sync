@@ -5,7 +5,6 @@ import json
 import os
 import sys
 import shutil
-import pyperclip
 from pydrive import files
 
 try:
@@ -277,9 +276,7 @@ def share_link(drive, file_id, to_print):
         s_file.FetchMetadata(fields='alternateLink, title')
 
         if to_print:
-            print("copied to clipboard!")
-            pyperclip.copy(s_file['alternateLink'])
-            pyperclip.paste()
+            print(s_file['alternateLink'])
         # save to file end
         else:
             with open(edit_config.share_store, "a") as share_store:

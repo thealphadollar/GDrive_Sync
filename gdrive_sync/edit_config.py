@@ -232,7 +232,6 @@ def write_config():
 
             elif option[int(opt)](value):
                 print("Success")
-                
         except ValueError:
             print("Error: invalid input")
             continue
@@ -240,7 +239,7 @@ def write_config():
     try:
     	with open(file_add.config_file, "w") as output:
     	    json.dump(config, output)
-    except IOError:
+   	except IOError:
    		print("Permission Denied: please run with sudo")
 
 
