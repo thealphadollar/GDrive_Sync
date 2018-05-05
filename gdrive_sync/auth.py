@@ -59,7 +59,6 @@ def reset_account():
     """
     change linked account
     Args:
-        None
     Returns:
         None
     """
