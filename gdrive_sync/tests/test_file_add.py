@@ -8,6 +8,7 @@ try:
 except ImportError:
     from .. import file_add
 
+dir_path = os.path.dirname(os.path.realpath(__file__))
 home = os.path.expanduser("~")
 
 
@@ -22,8 +23,8 @@ class FileAddTest(unittest.TestCase):
         :return:
         """
 
-        result = file_add.get_f_name(os.path.join(home, "Documents"))
-        self.assertEqual(result, "Documents")
+        result = file_add.get_f_name(dir_path)
+        self.assertEqual(result, "tests")
 
     def test_get_f_name_file(self):
         """

@@ -5,6 +5,6 @@ python:
 cache: pip
 install:
         - pip install -r requirements.txt
-before_script: gdrive_sync/tests
+before_script: cd gdrive_sync/tests
 script:
-        - python -m unittests discover -v
+        - python -m unittest discover -v

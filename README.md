@@ -1,4 +1,4 @@
-# GDrive_Sync
+# GDrive_Sync [![Build Status](https://travis-ci.org/thealphadollar/GDrive_Sync.svg?branch=master)](https://travis-ci.org/thealphadollar/GDrive_Sync)
 
 This repository contains scripts that make GDrive tasks easier using command line functions and PyDrive wrapper for Google Drive.
 
