@@ -56,8 +56,11 @@ def dir_exists(addr):
 
 # Extracts file name or folder name from full path
 def get_f_name(addr):
-    head, tail = ntpath.split(addr)
-    return tail or ntpath.basename(head)  # return tail when file, otherwise other one for folder
+    if os.path.exists(addr):
+        head, tail = ntpath.split(addr)
+        return tail or ntpath.basename(head)  # return tail when file, otherwise other one for folder
+    else:
+        raise TypeError("addr not valid")
 
 
 # to eradicate circular import problems
