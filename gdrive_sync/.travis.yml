@@ -1,0 +1,10 @@
+language: python
+python:
+        - "2.7"
+        - "3.5"
+cache: pip
+install:
+        - pip install -r requirements.txt
+before_script: gdrive_sync/tests
+script:
+        - python -m unittests discover -v
