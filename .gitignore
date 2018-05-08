@@ -120,3 +120,8 @@ main/.idea/dictionaries/thealpha.xml
 ../drive_test/
 ../ls/
 gdrive_sync/config_dicts/config.json
+
+# ignoring virtualenv directories
+gdrive_sync/bin/
+gdrive_sync/include/
+gdrive_sync/pip-selfcheck.json
