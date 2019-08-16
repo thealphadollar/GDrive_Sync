@@ -23,7 +23,10 @@ def get_username():
 
 
 # code to be launched by cron periodically
-def by_cron(drive):
+def by_cron(drive,file_id=None):
+    """
+    Modified para get the file_id to save in the same directory
+    """
     # traversing through all upload folders
     for folder in edit_config.up_addr():
         # stores if the file is being uploaded
@@ -59,7 +62,7 @@ def by_cron(drive):
             if item == "status.json":
                 continue
 
-            file_ops.f_up(drive, os.path.join(folder, item), None)
+            file_ops.f_up(drive, os.path.join(folder, item), file_id)
 
             # remove uploaded item from status.json
             with open(path, 'r') as f_input:

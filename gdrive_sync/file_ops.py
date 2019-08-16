@@ -189,7 +189,7 @@ def f_up(drive, addr, fold_id):
         return
 
     # pass the address to f_create and on success delete/move file/folder
-    if f_create(drive, addr, fold_id, str(file_add.get_f_name(addr)), False):
+    if f_create(drive, addr, fold_id, str(file_add.get_f_name(addr)), True):
         # remove file if Remove_Post_Upload is true, otherwise move to GDrive downloads
         remove_post_upload = edit_config.read_config()['Remove_Post_Upload']
         if remove_post_upload:

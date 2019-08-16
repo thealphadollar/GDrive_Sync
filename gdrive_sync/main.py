@@ -195,8 +195,13 @@ def main():
                 file_ops.f_list(drive, arguments[arg_index], 0)
 
         elif arguments[arg_index] == "-by_cron":
-            cron_handle.by_cron(drive)
-
+            # modified to get the id and destiny directory
+            if (arg_index + 1) < len(arguments):
+                arg_index += 1
+                # add the Id to same dicetory on gDrive
+                cron_handle.by_cron(drive,arguments[arg_index])
+            else:
+                cron_handle.by_cron(drive)
         else:
             print(str(arguments[arg_index]) + " is an unrecognised argument. Please report if you know this is an error"
                                               ".\n\n")
